@@ -1,0 +1,19 @@
+# Faster builds without sudo.
+sudo: false
+dist: trusty
+language: java
+notifications:
+  email: false
+cache:
+  directories:
+  - "$HOME/.cache"
+script: mvn install
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: $GH_TOKEN
+  file_glob: true
+  file:
+    - "target/mwmoney.jar"
+  on:
+    tags: true
